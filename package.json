@@ -1,0 +1,9 @@
+{
+  "name": "com.paldrasil.shared.popup",
+  "version": "0.1.0",
+  "displayName": "Shared Popup",
+  "description": "Shared popup library for Paldrasil games.",
+  "unity": "6000.2",
+  "dependencies": {
+  }
+}
