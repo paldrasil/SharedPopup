@@ -30,6 +30,14 @@ namespace Shared.Popup
 
         readonly List<Entry> _stack = new();
 
+        public bool IsShowing => _stack.Count > 0;
+
+        public PopupBase GetTopPopup()
+        {
+            if (_stack.Count == 0) return null;
+            return _stack[_stack.Count - 1].popup;
+        }
+
         void Awake()
         {
             if (!overlayCanvas) overlayCanvas = GetComponentInChildren<Canvas>(true);
@@ -99,7 +107,9 @@ namespace Shared.Popup
                 }
             }
 
-            var inst = Instantiate(prefab, container);
+            // var inst = Instantiate(prefab, container);
+            var instGO = uiPool.Spawn(prefab.gameObject, Vector3.zero, Quaternion.identity, -1, container);
+            var inst = instGO.GetComponent<T>();
             inst.transform.SetAsLastSibling();
             inst.__Bind(this);
             inst.OnBeforePresent(payload);
